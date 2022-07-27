@@ -1,6 +1,6 @@
 class game {
     constructor(){
-        this._gameID = Math.floor(Math.random * 100000);
+        this._gameID = Math.floor(Math.random() * 100000);
         this._state = [[" "," "," "],[" "," "," "],[" "," "," "]];
         this._player1 = {
             id: null,
@@ -42,9 +42,10 @@ class game {
     play(playerNum, x,y){
         if(this._status != 'ongoing') throw new Error("this game is not started yet, or done")
         if(playerNum > 2 || playerNum < 1) throw new Error('invalid player number')
+        if(this[`_player${playerNum}`].id == this._lastPlayFrom) throw new Error('player cannot play twice in a row')
         if(this._state[x][y] != " ") return "used";
         this._state[x][y] = this[`_player${playerNum}`].symbol;
-
+        this._lastPlayFrom = this[`_player${playerNum}`].id;
 
         this.check(playerNum)
 
