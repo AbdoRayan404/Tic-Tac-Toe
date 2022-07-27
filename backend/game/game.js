@@ -4,11 +4,11 @@ class game {
         this._state = [[" "," "," "],[" "," "," "],[" "," "," "]];
         this._player1 = {
             id: null,
-            symbol: "X"
+            symbol: null
         };
         this._player2 = {
             id: null,
-            symbol: "O"
+            symbol: null
         };
         this._lastPlayFrom = null;
         this._status = "pending";
@@ -30,12 +30,17 @@ class game {
         if(this[`_player${playerNum}`].id) throw new Error('player already has an id')
 
         this[`_player${playerNum}`].id = id;
-        if(this._player1.id && this._player2.id) this._status = 'ongoing';
+        if(this._player1.id && this._player2.id){
+            this._status = 'ongoing'
+            this._player1.symbol = "X"
+            this._player2.symbol = "O"
+        }
 
         return this[`_player${playerNum}`]
     }
 
     play(playerNum, x,y){
+        if(this._status != 'ongoing') throw new Error("this game is not started yet, or done")
         if(playerNum > 2 || playerNum < 1) throw new Error('invalid player number')
         if(this._state[x][y] != " ") return "used";
         this._state[x][y] = this[`_player${playerNum}`].symbol;
@@ -72,6 +77,12 @@ class game {
         if(hasEmptyField == false) return this._status = 'draw'
 
         return this._status = 'ongoing'
+    }
+
+    withdrawal(playerId){
+        if(this._status != 'ongoing') throw new Error("cannot withdrawal a game not started yet, or done")
+        if(this._player1.id == playerId || this._player2.id == playerId) return this._status = ['win', this._player1.id == playerId ? this._player2.id : this._player1.id]
+        else throw new Error("this player doesn't exist")
     }
 }
 
