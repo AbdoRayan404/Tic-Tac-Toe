@@ -10,6 +10,10 @@ const makeid = require('./lib/makeid')
 //imports
 const games = require('./model/games')
 const Game = require('../game/game')
+const rateLimiter = require('./middlewares/handlers/rateLimiter')
+
+//middlewares
+app.use(rateLimiter)
 
 app.get('/api/game/create', (req,res)=>{
     let newGame = {
