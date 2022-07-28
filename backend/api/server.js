@@ -24,7 +24,7 @@ app.get('/api/game/create', (req,res)=>{
     }
 
     games.push(newGame)
-    res.status(200).json(newGame)
+    res.status(200).json({"invite":newGame.invite_code})
 })
 
 app.listen(PORT, ()=>{console.log('I AM UP, listening on port', PORT)})
