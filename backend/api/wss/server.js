@@ -1,9 +1,11 @@
 const { WebSocketServer } = require('ws');
 
+//server
 const wss = new WebSocketServer({"noServer":true})
 
-wss.on('connection', (ws)=>{
-    ws.send('hello there')
-})
+//handlers
+const connectionHandler = require('./handlers/connectionHandler')
+
+wss.on('connection', connectionHandler)
 
 module.exports = wss;
