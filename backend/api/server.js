@@ -1,30 +1,23 @@
 const express = require('express');
+const logit = require('logit-http');
 const app = express();
 
 //env vars
 const PORT = process.env.PORT || 3000
 
-//lib
-const makeid = require('./lib/makeid')
+//server
+const server = app.listen(PORT, ()=>{console.log('HTTP server is up, listening on port', PORT)})
 
 //imports
-const games = require('./model/games')
-const Game = require('../game/game')
 const rateLimiter = require('./middlewares/handlers/rateLimiter')
+const upgradeHandler = require('./middlewares/handlers/upgradeHanlder')
+const gameCreate = require('./middlewares/routes/gameCreate')
+
+//HTTP -> WS upgrade handling
+server.on('upgrade', upgradeHandler)
 
 //middlewares
+app.use(logit)
 app.use(rateLimiter)
 
-app.get('/api/game/create', (req,res)=>{
-    let newGame = {
-        created_at: new Date().toDateString(),
-        created_from: req.ip,
-        invite_code: makeid(10),
-        game: new Game()
-    }
-
-    games.push(newGame)
-    res.status(200).json({"invite":newGame.invite_code})
-})
-
-app.listen(PORT, ()=>{console.log('I AM UP, listening on port', PORT)})
+app.get('/api/game/create', gameCreate)
