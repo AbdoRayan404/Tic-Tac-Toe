@@ -46,9 +46,9 @@ class game {
     }
 
     play(id, x,y){
-        if(this._status != 'ongoing') throw new Error("this game is not started yet, or done")
+        if(this._status != 'ongoing') return "game is not going";
         let player = this._player1.id == id ? this._player1 : this._player2
-        if(id == this._lastPlayFrom) throw new Error('player cannot play twice in a row')
+        if(id == this._lastPlayFrom) return "player cannot play twice in a row";
         if(this._state[x][y] != " ") return "used";
         this._state[x][y] = player.symbol;
         this._lastPlayFrom = id;
