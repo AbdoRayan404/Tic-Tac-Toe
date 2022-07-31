@@ -1,9 +1,6 @@
 const webSockets = require('../model/websockets')
 const games = require('../../model/games')
 
-//handlers
-const messageHandler = require('./messageHandler')
-
 module.exports = (ws, request)=>{
     ws.playerID = Math.floor(Math.random() * 100000);
     ws.gameID = null;
@@ -23,6 +20,10 @@ module.exports = (ws, request)=>{
                     for(let j = 0; j < webSockets.length; j++){
                         if(webSockets[j].gameID === ws.gameID && webSockets[j].playerID !== ws.playerID){
                             webSockets[j].send(JSON.stringify({"notify":"opponent joined. you may start now"})) //notifying the other player
+                            
+                            //now send the game matrix/state to the players
+                            ws.send(JSON.stringify(games[i].game.state()))
+                            webSockets[j].send(JSON.stringify(games[i].game.state()))
                         }
                     }
                 }else if(gameStatusAfterJoin == 'pending'){
@@ -33,9 +34,5 @@ module.exports = (ws, request)=>{
                 return ws.terminate();
             }
         }
-    }
-
-    if(ws.gameID){
-        ws.on('message', messageHandler)
     }
 }
