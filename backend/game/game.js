@@ -89,9 +89,9 @@ class game {
     }
 
     withdrawal(playerId){
-        if(this._status != 'ongoing') throw new Error("cannot withdrawal a game not started yet, or done")
+        if(this._status != 'ongoing') return "cannot withdrawal a game not started yet, or done"
         if(this._player1.id == playerId || this._player2.id == playerId) return this._status = ['win', this._player1.id == playerId ? this._player2.id : this._player1.id]
-        else throw new Error("this player doesn't exist")
+        else return "this player doesn't exist"
     }
 }
 
