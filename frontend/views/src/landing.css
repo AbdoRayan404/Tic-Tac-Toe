@@ -1,0 +1,51 @@
+#welcome {
+    width: 300px;
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+
+#welcome > span:first-child{
+    font-size: 50px;
+    font-family: cursive;
+    font-weight: bold;
+}
+
+#welcome > span:not(:first-child){
+    font-size: 25px;
+    font-family: cursive;
+}
+
+#game {
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+#game span {
+    font-family: cursive;
+    font-size: 20px;
+    height: 20px;
+}
+
+#game #error {
+    display: none;
+    font-size: 17px;
+    color: red
+}
+
+#game #create_game {
+    height: 25px;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    width: 75px;
+    line-height: 25px;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+}
+
+#game #invite_code {
+    border-radius: 16px;
+}
