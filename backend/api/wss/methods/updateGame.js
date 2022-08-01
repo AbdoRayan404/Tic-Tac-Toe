@@ -6,6 +6,7 @@ module.exports = (gameID)=>{
         if(games[i].game.gameID === gameID){
             let p1 = games[i].game._player1.id;
             let p2 = games[i].game._player2.id;
+
             for(let j = 0; j < webSockets.length; j++){
                 if(webSockets[j].playerID === p1){
                     webSockets[j].send(JSON.stringify({"status":games[i].game.status, "state":games[i].game.state()}))
@@ -13,6 +14,8 @@ module.exports = (gameID)=>{
                     webSockets[j].send(JSON.stringify({"status":games[i].game.status, "state":games[i].game.state()}))
                 }
             }
+
+            break;
         }
     }
 }
