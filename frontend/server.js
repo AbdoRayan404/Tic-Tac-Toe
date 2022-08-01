@@ -15,4 +15,8 @@ app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/views/landing.html')
 })
 
+app.get('/game/:invite', (req, res)=>{
+    res.sendFile(__dirname + "/views/game.html")
+})
+
 app.listen(PORT, ()=> console.log('This bad boy is up, at port', PORT))
