@@ -1,6 +1,6 @@
 const games = require('../../model/games')
-const gameUpdate = require('./gameUpdate')
-const gameEnd = require('./endGame')
+const gameUpdate = require('../methods/updateGame')
+const gameEnd = require('../methods/endGame')
 
 module.exports = (ws, data)=>{
     try{
@@ -11,15 +11,16 @@ module.exports = (ws, data)=>{
     
     if(data.type === 'play'){
         for(let i = 0; i < games.length; i++){
-            if(games[i].game.status !== 'ongoing') return ws.send(JSON.stringify({'error':'game not started'}))
-
-            if(games[i].game.gameID == ws.gameID){
+            if(games[i].game.gameID === ws.gameID){
+                if(games[i].game.status !== 'ongoing') return ws.send(JSON.stringify({'error':'game not started'}))
+                
                 let game = games[i].game;
 
                 if(data.x > 2 || data.y > 2) return ws.send(JSON.stringify({'error':'invalid x, y'}))
 
                 
                 let response = game.play(ws.playerID, data.x, data.y)
+                
                 if(response == 'ongoing'){
                     gameUpdate(games[i].game.gameID)
                 }else if(response == 'used'){
