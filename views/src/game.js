@@ -62,7 +62,7 @@ function message(msg){
 }
 
 function connect(){
-    ws = new WebSocket('ws://' + window.location.host + '/game/join/' + window.location.href.split('/').pop())
+    ws = new WebSocket('wss://' + window.location.host + '/game/join/' + window.location.href.split('/').pop())
     ws.onopen = ()=> document.querySelector('#game-status').innerHTML = 'Joined. waiting for opponent'
     ws.onmessage = message
 }

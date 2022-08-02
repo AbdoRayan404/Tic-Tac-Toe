@@ -18,7 +18,7 @@ function join(){
     let error = document.querySelector('#game #error')
 
     //check the invite code first
-    fetch(window.location.origin + '/' + invite.value)
+    fetch(window.location.origin + '/api/game/inspect/' + invite.value)
         .then((response)=>{
             if(response.status == 200){
                 window.location.href = 'game/' + invite.value
