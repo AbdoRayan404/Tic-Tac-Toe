@@ -3,7 +3,7 @@ const makeid = require('../../lib/makeid')
 
 //imports
 const games = require('../../model/games')
-const Game = require('../../../game/game')
+const Game = require('../../game/game')
 
 module.exports = (req,res)=>{
     let newGame = {

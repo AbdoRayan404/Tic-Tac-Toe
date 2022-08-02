@@ -21,7 +21,13 @@ server.on('upgrade', upgradeHandler)
 //middlewares
 app.use(cors())
 app.use(logit)
-app.use(rateLimiter)
+app.use('/src', express.static('views/src'))
+app.use('/api/game/create', rateLimiter)
 
+//api routes
 app.get('/api/game/create', gameCreate)
 app.get('/api/game/inspect/:invite', gameInspect)
+
+//static files route
+app.get('/', (req, res)=> res.sendFile(__dirname + '/views/landing.html'))
+app.get('/game/:invite', (req, res)=> res.sendFile(__dirname + '/views/game.html'))

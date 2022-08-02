@@ -2,7 +2,7 @@
 //add me in discord, we might have small talk about coding Nameless#8663
 
 function create(){
-    fetch('http://localhost:3000/api/game/create')
+    fetch('api/game/create')
         .then((response)=>{
             if(response.status == 200){
                 return response.json()
@@ -18,7 +18,7 @@ function join(){
     let error = document.querySelector('#game #error')
 
     //check the invite code first
-    fetch('http://localhost:3000/api/game/inspect/' + invite.value)
+    fetch(window.location.origin + '/' + invite.value)
         .then((response)=>{
             if(response.status == 200){
                 window.location.href = 'game/' + invite.value
