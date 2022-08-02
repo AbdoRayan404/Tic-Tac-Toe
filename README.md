@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
-A simple login-free Tic Tac Toe game, built with WebSocket.
-
+A simple login-free Tic Tac Toe game, built with WebSocket.<br>
+[Try it !](https://tic-tac-toe-404.herokuapp.com/)
 # Phases of Development
 - **creating the normal game** <br>
 Here i will just make the normal game, but with a little preparations for the merge later. but the core task in this phase is to make the working game<br><br>
