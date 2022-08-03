@@ -1,3 +1,5 @@
+document.querySelector('#invite_code').innerHTML = 'invite code: ' + window.location.href.split('/').pop()
+
 var game = {
     status: null
 }
