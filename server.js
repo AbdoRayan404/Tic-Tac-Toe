@@ -31,3 +31,4 @@ app.get('/api/game/inspect/:invite', gameInspect)
 //static files route
 app.get('/', (req, res)=> res.sendFile(__dirname + '/views/landing.html'))
 app.get('/game/:invite', (req, res)=> res.sendFile(__dirname + '/views/game.html'))
+app.get('/invalid', (req, res)=> res.sendFile(__dirname + '/views/invalid.html'))
